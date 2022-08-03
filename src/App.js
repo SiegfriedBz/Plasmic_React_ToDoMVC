@@ -12,6 +12,11 @@ function App() {
     createEntry("Meet Alex in Theater")
   ])
 
+  const onAdd = (text) => {
+    const newEntry = createEntry(text)
+    setEntries([...entries, newEntry])
+  }
+
   const handleChange = ({id, ...rest}) => {
     let changedEntry = entries.find(entry => entry.id === id)
     changedEntry = {...changedEntry, ...rest }
@@ -32,6 +37,7 @@ function App() {
       <ThemeContext.Provider value={undefined}>
           <TodoApp 
             entries={entries} 
+            onAdd={onAdd}
             handleChange={handleChange}
             handleDelete={handleDelete}
             />

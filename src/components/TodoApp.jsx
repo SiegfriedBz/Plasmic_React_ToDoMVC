@@ -2,7 +2,7 @@ import * as React from "react";
 import { PlasmicTodoApp } from "./plasmic/copy_of_todo_mvc/PlasmicTodoApp";
 import Task from "./Task"
 
-function TodoApp_({entries, handleChange, handleDelete, ...rest}, ref) {
+function TodoApp_({entries, onAdd, handleChange, handleDelete, ...rest}, ref) {
 
   console.log(entries)
 
@@ -21,6 +21,9 @@ function TodoApp_({entries, handleChange, handleDelete, ...rest}, ref) {
           ></Task>
         )
     })}}
+    header={{
+      onAdd: (text) => onAdd(text)
+    }}
     />;
 }
 

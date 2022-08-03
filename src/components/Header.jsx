@@ -1,9 +1,24 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { PlasmicHeader } from "./plasmic/copy_of_todo_mvc/PlasmicHeader";
 
-function Header_(props, ref) {
+function Header_({onAdd, ...rest}, ref) {
 
-  return <PlasmicHeader headerContainer={{ ref }} {...props} />;
+  const [inputText, setInputText] = useState("")
+
+
+  return <PlasmicHeader 
+    headerContainer={{ ref }} {...rest} 
+    textInput={{
+      value: inputText, 
+      onChange: (e) => setInputText(e.target.value),
+      onKeyDown: (e) => {
+        if(e.key === "Enter") {
+          onAdd(inputText)
+          setInputText("")
+        }
+      }
+    }}
+    />;
 }
 
 const Header = React.forwardRef(Header_);

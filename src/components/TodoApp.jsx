@@ -22,6 +22,12 @@ function TodoApp_({entries, handleAdd, handleChange, handleDelete, ...rest}, ref
         )
     })}}
     header={{
+      state:
+        entries.length === 0 ?
+        "empty" :
+        entries.every((e) => e.done) ?
+        "allChecked" :
+        undefined,
       handleAdd: (text) => handleAdd(text)
     }}
     />;

@@ -22,7 +22,7 @@
 .slotTargetCount {
   color: var(--token-UEwUkJ6GoTE1v);
 }
-.text__xpklp {
+.text {
   color: var(--token-UEwUkJ6GoTE1v);
 }
 .freeBox__y6Pzm {
@@ -47,7 +47,7 @@
   > img {
   margin-left: 20px;
 }
-.toggleButton__o3BZm:global(.__wab_instance) {
+.allToggle:global(.__wab_instance) {
   position: relative;
   width: auto;
   flex-grow: 0;
@@ -55,7 +55,7 @@
   height: auto;
   align-self: flex-start;
 }
-.toggleButton___1ZUb:global(.__wab_instance) {
+.completedToggle:global(.__wab_instance) {
   position: relative;
   width: auto;
   flex-grow: 0;
@@ -63,7 +63,7 @@
   height: auto;
   align-self: flex-start;
 }
-.toggleButton__hbqn4:global(.__wab_instance) {
+.activeToggle:global(.__wab_instance) {
   position: relative;
   width: auto;
   flex-grow: 0;
@@ -71,17 +71,18 @@
   height: auto;
   align-self: flex-start;
 }
-.text__o0FAk {
+.clearBtn {
   position: absolute;
   color: var(--token-UEwUkJ6GoTE1v);
   left: 371px;
   top: 14px;
   cursor: pointer;
+  display: block;
 }
-.textstate_hasCompleted__o0FAk5Gjm {
+.clearBtnstate_hasCompleted {
   left: auto;
   right: 15px;
 }
-.footerContainer .text__o0FAk:hover {
+.footerContainer .clearBtn:hover {
   text-decoration-line: underline;
 }

@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto%3Aital%2Cwght%400%2C400%3B0%2C500%3B0%2C700%3B0%2C900%3B1%2C400%3B1%2C500%3B1%2C700%3B1%2C900&family=Inter%3Aital%2Cwght%400%2C400%3B0%2C600%3B0%2C700%3B0%2C900&family=Inconsolata%3Aital%2Cwght%400%2C400%3B0%2C600%3B0%2C700%3B0%2C900&display=swap");
 
 .plasmic_tokens {
-  --token-D6pCvvC3rgVmE: rgba(175, 47, 47, 0.15);
+  --token-D6pCvvC3rgVmE: #2f4daf52;
   --plasmic-token-header: var(--token-D6pCvvC3rgVmE);
   --token-qD3DW8ZunQY4e: rgb(245, 245, 245);
   --plasmic-token-page-bg: var(--token-qD3DW8ZunQY4e);

@@ -95,7 +95,6 @@
   position: relative;
   width: auto;
   align-self: stretch;
-  height: auto;
   flex-grow: 0;
   flex-shrink: 1;
 }

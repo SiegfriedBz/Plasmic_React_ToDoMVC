@@ -96,24 +96,21 @@ function PlasmicFooter__RenderFunc(props) {
 
           {(hasVariant(variants, "state", "singularLeft") ? true : true) ? (
             <div
+              data-plasmic-name={"text"}
+              data-plasmic-override={overrides.text}
               className={classNames(
                 projectcss.all,
                 projectcss.__wab_text,
-                sty.text__xpklp,
+                sty.text,
                 {
-                  [sty.textstate_empty__xpklpDkzAd]: hasVariant(
-                    variants,
-                    "state",
-                    "empty"
-                  ),
-
-                  [sty.textstate_hasCompleted__xpklp5Gjm]: hasVariant(
+                  [sty.textstate_empty]: hasVariant(variants, "state", "empty"),
+                  [sty.textstate_hasCompleted]: hasVariant(
                     variants,
                     "state",
                     "hasCompleted"
                   ),
 
-                  [sty.textstate_singularLeft__xpklpFRsPn]: hasVariant(
+                  [sty.textstate_singularLeft]: hasVariant(
                     variants,
                     "state",
                     "singularLeft"
@@ -135,37 +132,57 @@ function PlasmicFooter__RenderFunc(props) {
         className={classNames(projectcss.all, sty.freeBox__y6Pzm)}
       >
         <ToggleButton
-          className={classNames("__wab_instance", sty.toggleButton__o3BZm)}
+          data-plasmic-name={"allToggle"}
+          data-plasmic-override={overrides.allToggle}
+          className={classNames("__wab_instance", sty.allToggle)}
           state={"selected"}
         >
           {"All"}
         </ToggleButton>
 
         <ToggleButton
-          className={classNames("__wab_instance", sty.toggleButton___1ZUb)}
+          data-plasmic-name={"completedToggle"}
+          data-plasmic-override={overrides.completedToggle}
+          className={classNames("__wab_instance", sty.completedToggle)}
         >
           {"Completed"}
         </ToggleButton>
 
         <ToggleButton
-          className={classNames("__wab_instance", sty.toggleButton__hbqn4)}
+          data-plasmic-name={"activeToggle"}
+          data-plasmic-override={overrides.activeToggle}
+          className={classNames("__wab_instance", sty.activeToggle)}
         >
           {"Active"}
         </ToggleButton>
       </p.Stack>
 
-      {(hasVariant(variants, "state", "hasCompleted") ? true : false) ? (
+      {(hasVariant(variants, "state", "hasCompleted") ? true : true) ? (
         <div
+          data-plasmic-name={"clearBtn"}
+          data-plasmic-override={overrides.clearBtn}
           className={classNames(
             projectcss.all,
             projectcss.__wab_text,
-            sty.text__o0FAk,
+            sty.clearBtn,
             {
-              [sty.textstate_hasCompleted__o0FAk5Gjm]: hasVariant(
+              [sty.clearBtnstate_empty]: hasVariant(variants, "state", "empty"),
+              [sty.clearBtnstate_hasCompleted]: hasVariant(
                 variants,
                 "state",
                 "hasCompleted"
-              )
+              ),
+
+              [sty.clearBtnstate_hasCompleted_state_empty]:
+                hasVariant(variants, "state", "hasCompleted") &&
+                hasVariant(variants, "state", "empty"),
+              [sty.clearBtnstate_hasCompleted_state_empty_state_singularLeft]:
+                hasVariant(variants, "state", "hasCompleted") &&
+                hasVariant(variants, "state", "singularLeft") &&
+                hasVariant(variants, "state", "empty"),
+              [sty.clearBtnstate_hasCompleted_state_singularLeft]:
+                hasVariant(variants, "state", "hasCompleted") &&
+                hasVariant(variants, "state", "singularLeft")
             }
           )}
         >
@@ -177,7 +194,20 @@ function PlasmicFooter__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  footerContainer: ["footerContainer"]
+  footerContainer: [
+    "footerContainer",
+    "text",
+    "allToggle",
+    "completedToggle",
+    "activeToggle",
+    "clearBtn"
+  ],
+
+  text: ["text"],
+  allToggle: ["allToggle"],
+  completedToggle: ["completedToggle"],
+  activeToggle: ["activeToggle"],
+  clearBtn: ["clearBtn"]
 };
 
 function makeNodeComponent(nodeName) {
@@ -214,6 +244,11 @@ export const PlasmicFooter = Object.assign(
   makeNodeComponent("footerContainer"),
   {
     // Helper components rendering sub-elements
+    text: makeNodeComponent("text"),
+    allToggle: makeNodeComponent("allToggle"),
+    completedToggle: makeNodeComponent("completedToggle"),
+    activeToggle: makeNodeComponent("activeToggle"),
+    clearBtn: makeNodeComponent("clearBtn"),
     // Metadata about props expected for PlasmicFooter
     internalVariantProps: PlasmicFooter__VariantProps,
     internalArgProps: PlasmicFooter__ArgProps

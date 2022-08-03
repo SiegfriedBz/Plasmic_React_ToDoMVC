@@ -17,7 +17,7 @@ function App() {
     setEntries([...entries, newEntry])
   }
 
-  const handleChange = ({id, ...rest}) => {
+  const onChange = ({id, ...rest}) => {
     let changedEntry = entries.find(entry => entry.id === id)
     changedEntry = {...changedEntry, ...rest }
     setEntries(entries.map(entry => {
@@ -25,7 +25,7 @@ function App() {
     }))
   }
 
-  const handleDelete = (id) => {
+  const onDelete = (id) => {
     setEntries(entries.filter(entry => {
       return entry.id !== id
     }))
@@ -37,9 +37,9 @@ function App() {
       <ThemeContext.Provider value={undefined}>
           <TodoApp 
             entries={entries} 
-            onAdd={onAdd}
-            handleChange={handleChange}
-            handleDelete={handleDelete}
+            handleAdd={onAdd}
+            handleChange={onChange}
+            handleDelete={onDelete}
             />
       </ThemeContext.Provider>
   );

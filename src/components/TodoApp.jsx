@@ -1,14 +1,26 @@
 import * as React from "react";
 import { PlasmicTodoApp } from "./plasmic/copy_of_todo_mvc/PlasmicTodoApp";
+import Task from "./Task"
 
-function TodoApp_(props, ref) {
+function TodoApp_({entries, handleChange, handleDelete, ...rest}, ref) {
+
+  console.log(entries)
 
   return <PlasmicTodoApp 
-    root={{ ref }} {...props} 
+    root={{ ref }} {...rest} 
     appTitle={{
       children: "My ToDoz",
-      onClick: () => {alert("Hello from ToDo")}
     }}
+    tasksContainer={{
+      children: entries.map(entry => {
+        return (
+          <Task 
+            entry={entry}
+            handleChange={handleChange}
+            handleDelete={handleDelete}
+          ></Task>
+        )
+    })}}
     />;
 }
 

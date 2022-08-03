@@ -15,6 +15,7 @@ import {
   hasVariant,
   classNames,
   createPlasmicElementProxy,
+  useTrigger,
   deriveRenderOpts,
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
@@ -32,6 +33,11 @@ function PlasmicTask__RenderFunc(props) {
   const $ctx = ph.useDataEnv?.() || {};
   const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
   const $props = args;
+  const [isRootHover, triggerRootHoverProps] = useTrigger("useHover", {});
+  const triggers = {
+    hover_root: isRootHover
+  };
+
   const globalVariants = ensureGlobalVariants({
     theme: useTheme()
   });
@@ -63,9 +69,16 @@ function PlasmicTask__RenderFunc(props) {
             hasVariant(globalVariants, "theme", "dark")
         }
       )}
+      data-plasmic-trigger-props={[triggerRootHoverProps]}
     >
       <div
         className={classNames(projectcss.all, sty.freeBox__aettB, {
+          [sty.freeBoxstate_checked__aettBwJzaw]: hasVariant(
+            variants,
+            "state",
+            "checked"
+          ),
+
           [sty.freeBoxstate_editing__aettBqi57O]: hasVariant(
             variants,
             "state",
@@ -79,17 +92,19 @@ function PlasmicTask__RenderFunc(props) {
       >
         {(hasVariant(variants, "state", "editing") ? false : true) ? (
           <div
-            className={classNames(projectcss.all, sty.freeBox__bQOnk, {
-              [sty.freeBoxstate_checked__bQOnkWJzaw]: hasVariant(
+            data-plasmic-name={"checkbox"}
+            data-plasmic-override={overrides.checkbox}
+            className={classNames(projectcss.all, sty.checkbox, {
+              [sty.checkboxstate_checked]: hasVariant(
                 variants,
                 "state",
                 "checked"
               ),
 
-              [sty.freeBoxstate_checked_global_theme_dark__bQOnkWJzawXl4Fj]:
+              [sty.checkboxstate_checked_global_theme_dark]:
                 hasVariant(variants, "state", "checked") &&
                 hasVariant(globalVariants, "theme", "dark"),
-              [sty.freeBoxstate_editing__bQOnkQi57O]: hasVariant(
+              [sty.checkboxstate_editing]: hasVariant(
                 variants,
                 "state",
                 "editing"
@@ -136,6 +151,12 @@ function PlasmicTask__RenderFunc(props) {
             "dark"
           ),
 
+          [sty.freeBoxstate_checked__mbgMhWJzaw]: hasVariant(
+            variants,
+            "state",
+            "checked"
+          ),
+
           [sty.freeBoxstate_editing__mbgMhQi57O]: hasVariant(
             variants,
             "state",
@@ -149,18 +170,16 @@ function PlasmicTask__RenderFunc(props) {
       >
         {(hasVariant(variants, "state", "editing") ? false : true) ? (
           <div
-            className={classNames(projectcss.all, sty.freeBox__u94Gd, {
-              [sty.freeBoxstate_checked__u94GdWJzaw]: hasVariant(
+            data-plasmic-name={"label"}
+            data-plasmic-override={overrides.label}
+            className={classNames(projectcss.all, sty.label, {
+              [sty.labelstate_checked]: hasVariant(
                 variants,
                 "state",
                 "checked"
               ),
 
-              [sty.freeBoxstate_editing__u94GdQi57O]: hasVariant(
-                variants,
-                "state",
-                "editing"
-              )
+              [sty.labelstate_editing]: hasVariant(variants, "state", "editing")
             })}
           >
             {p.renderPlasmicSlot({
@@ -201,6 +220,12 @@ function PlasmicTask__RenderFunc(props) {
               projectcss.input,
               sty.textInput,
               {
+                [sty.textInputstate_checked]: hasVariant(
+                  variants,
+                  "state",
+                  "checked"
+                ),
+
                 [sty.textInputstate_editing]: hasVariant(
                   variants,
                   "state",
@@ -219,24 +244,29 @@ function PlasmicTask__RenderFunc(props) {
 
         {(hasVariant(variants, "state", "editing") ? false : true) ? (
           <div
-            className={classNames(projectcss.all, sty.freeBox__vFkhB, {
-              [sty.freeBoxstate_editing__vFkhBqi57O]: hasVariant(
-                variants,
-                "state",
-                "editing"
-              )
+            data-plasmic-name={"box"}
+            data-plasmic-override={overrides.box}
+            className={classNames(projectcss.all, sty.box, {
+              [sty.boxstate_checked]: hasVariant(variants, "state", "checked"),
+              [sty.boxstate_editing]: hasVariant(variants, "state", "editing")
             })}
           >
             <button
-              data-plasmic-name={"button"}
-              data-plasmic-override={overrides.button}
+              data-plasmic-name={"deleteBtn"}
+              data-plasmic-override={overrides.deleteBtn}
               className={classNames(
                 projectcss.all,
                 projectcss.button,
                 projectcss.__wab_text,
-                sty.button,
+                sty.deleteBtn,
                 {
-                  [sty.buttonstate_editing]: hasVariant(
+                  [sty.deleteBtnstate_checked]: hasVariant(
+                    variants,
+                    "state",
+                    "checked"
+                  ),
+
+                  [sty.deleteBtnstate_editing]: hasVariant(
                     variants,
                     "state",
                     "editing"
@@ -244,7 +274,7 @@ function PlasmicTask__RenderFunc(props) {
                 }
               )}
             >
-              {"×"}
+              {triggers.hover_root ? "×" : "×"}
             </button>
           </div>
         ) : null}
@@ -254,10 +284,23 @@ function PlasmicTask__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "img", "textInput", "textbox", "button"],
+  root: [
+    "root",
+    "checkbox",
+    "img",
+    "label",
+    "textInput",
+    "textbox",
+    "box",
+    "deleteBtn"
+  ],
+
+  checkbox: ["checkbox", "img"],
   img: ["img"],
+  label: ["label"],
   textInput: ["textInput", "textbox"],
-  button: ["button"]
+  box: ["box", "deleteBtn"],
+  deleteBtn: ["deleteBtn"]
 };
 
 function makeNodeComponent(nodeName) {
@@ -294,9 +337,12 @@ export const PlasmicTask = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    checkbox: makeNodeComponent("checkbox"),
     img: makeNodeComponent("img"),
+    label: makeNodeComponent("label"),
     textInput: makeNodeComponent("textInput"),
-    button: makeNodeComponent("button"),
+    box: makeNodeComponent("box"),
+    deleteBtn: makeNodeComponent("deleteBtn"),
     // Metadata about props expected for PlasmicTask
     internalVariantProps: PlasmicTask__VariantProps,
     internalArgProps: PlasmicTask__ArgProps

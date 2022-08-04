@@ -1,26 +1,22 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { PlasmicTodoApp } from "./plasmic/copy_of_todo_mvc/PlasmicTodoApp";
 import Task from "./Task"
 
-function TodoApp_({entries, handleAdd, handleChange, handleDelete, ...rest}, ref) {
+function TodoApp_({entries, handleAdd, handleChange, handleDelete, handleClear, ...rest}, ref) {
 
-  console.log(entries)
+  const [showFilter, setShowFilter] = useState("all")
+
+  let shownEntries = entries.filter(e => {
+    return showFilter === 'active' ? !e.done : showFilter === 'completed' ? e.done : true
+  })
+
+  console.log(shownEntries)
 
   return <PlasmicTodoApp 
     root={{ ref }} {...rest} 
     appTitle={{
-      children: "My ToDoz",
+      children: "Plasmic ToDoz",
     }}
-    tasksContainer={{
-      children: entries.map(entry => {
-        return (
-          <Task 
-            entry={entry}
-            handleChange={handleChange}
-            handleDelete={handleDelete}
-          ></Task>
-        )
-    })}}
     header={{
       state:
         entries.length === 0 ?
@@ -29,6 +25,22 @@ function TodoApp_({entries, handleAdd, handleChange, handleDelete, ...rest}, ref
         "allChecked" :
         undefined,
       handleAdd: (text) => handleAdd(text)
+    }}
+    tasksContainer={{
+      children: shownEntries.map(entry => {
+        return (
+          <Task 
+            entry={entry}
+            handleChange={handleChange}
+            handleDelete={handleDelete}
+          ></Task>
+        )
+    })}}
+    footer={{
+      showFilter,
+      setShowFilter,
+      handleClear,
+      count: entries.filter(entry => !entry.done).length
     }}
     />;
 }

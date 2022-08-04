@@ -1,9 +1,13 @@
 import * as React from "react";
 import { PlasmicToggleButton } from "./plasmic/copy_of_todo_mvc/PlasmicToggleButton";
 
-function ToggleButton_(props, ref) {
+function ToggleButton_({selected, onClick, state,...rest}, ref) {
 
-  return <PlasmicToggleButton root={{ ref }} {...props} />;
+  return <PlasmicToggleButton 
+    root={{ ref }} {...rest} 
+    state={selected ? "selected" : undefined}
+    onClick={onClick}
+    />;
 }
 
 const ToggleButton = React.forwardRef(ToggleButton_);

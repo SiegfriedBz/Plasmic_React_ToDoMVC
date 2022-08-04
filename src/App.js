@@ -31,6 +31,10 @@ function App() {
     }))
   }
 
+  const onClear = () => {
+    setEntries(entries.filter(entry => !entry.done))
+  }
+
   console.log(entries)
 
   return (
@@ -40,6 +44,7 @@ function App() {
             handleAdd={onAdd}
             handleChange={onChange}
             handleDelete={onDelete}
+            handleClear={onClear}
             />
       </ThemeContext.Provider>
   );

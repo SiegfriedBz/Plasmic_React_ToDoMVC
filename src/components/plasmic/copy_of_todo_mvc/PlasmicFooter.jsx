@@ -43,7 +43,14 @@ function PlasmicFooter__RenderFunc(props) {
         projectcss.plasmic_default_styles,
         projectcss.plasmic_mixins,
         projectcss.plasmic_tokens,
-        sty.footerContainer
+        sty.footerContainer,
+        {
+          [sty.footerContainerstate_singularLeft]: hasVariant(
+            variants,
+            "state",
+            "singularLeft"
+          )
+        }
       )}
     >
       {(
@@ -120,7 +127,7 @@ function PlasmicFooter__RenderFunc(props) {
             >
               {hasVariant(variants, "state", "singularLeft")
                 ? " item left"
-                : " items left"}
+                : " active left"}
             </div>
           ) : null}
         </div>
